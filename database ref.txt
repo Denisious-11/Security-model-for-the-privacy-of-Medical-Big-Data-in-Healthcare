@@ -1,0 +1,8 @@
+xray decoy 
+-----------
+Body Parts X-Ray Images in PNG (kaggle)
+
+
+mri decoy
+----------
+Brain MRI Images for Brain Tumor Detection(kaggle)

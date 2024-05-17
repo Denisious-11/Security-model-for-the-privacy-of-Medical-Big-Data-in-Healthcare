@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>DMBD_User</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <style type="text/css">
+        #secret{color: #131313;}
+        #secret:hover{color: white;}
+    </style>
+</head>
+
+<body onload="findAttack()">
+    <!-- Navbar Start -->
+    <div>
+        <div >
+            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
+                <a href="#" class="navbar-brand">
+                    <h1 class="m-0 text-white display-4"><span class="text-primary">MED</span>ata<span class="text-primary"></h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse" >
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="{% url 'go_to_verification' %}" class="nav-item nav-link active" id="secret" >Goback</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 mb-5">
+        <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+                <div>
+
+                    <!-- {% static 'Decoy_images/user4/xray_image2.jpg' %} -->
+                    <!-- {% static 'images/user_home.jpg' %} -->
+                    
+
+                    <input id="u1" type="hidden" value="{{username}}">
+
+                    <input id="out1" type="hidden" value="">
+
+                    <div class="carousel-caption d-flex align-items-center justify-content-center">
+                        <div class="p-5" style="width: 100%; max-width: 900px;">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <!-- <input type="text" id="ip1" value="" readonly> -->
+            <img id="my_image" class="img-fluid" style="margin-left: 300px;margin-top: 20px;" src="{% static 'images/user_home.jpg' %}" alt="Image" width="700px">
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid py-4 px-sm-3 px-md-5" style="background-color:black;position: relative; top:0px;">
+        <p class="m-0 text-center">
+            &copy; <a class="font-weight-semi-bold" href="#">MEData</a>. All Rights Reserved. Designed by
+            <a class="font-weight-semi-bold" href="#">Me</a>
+        </p>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'mail/contact.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+   
+
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            my_username=$("#u1").val()
+
+            // alert(my_username)
+
+            $.ajax({
+                    url:"/get_images/",
+                    datatype:"json",
+                    data:{
+                        "my_username":my_username,
+                    },
+                    success:function(any)
+                    {
+                        // $("#ip1").val("["+any.key+"]")
+                        // alert(any);
+                        // alert(typeof(any))
+                        // alert(any.key)
+                        // alert(typeof(any.key))
+                        // $("#out1").val(any);
+                        // var images = JSON.parse("[" + any.key + "]");
+                        // var st=any.key
+                        // var images =st.split(',');
+                        var images=any.key
+                        // alert(images[0])
+                        var i = 0;
+                        var renew = setInterval(function()
+                        {
+                            if(images.length == i)
+                            {
+                                i = 0;
+                            }
+                            else 
+                            {
+                                // alert(i)
+                                // alert(images[i])
+                                // alert(typeof(images[i]))
+
+                                a="/static/Decoy_images/"+my_username+"/"+images[i];
+                                // alert(a)
+                                // a="{% static 'Decoy_images/"+my_username+"/"+images[i]+"' %}"
+                                // alert(a)
+                                // document.getElementById("my_image").src = "{% static 'Decoy_images/"+my_username+"/"+images[i]+"' %}";
+                                document.getElementById("my_image").src = "/static/Decoy_images/"+my_username+"/"+images[i];
+                                // $("#my_image").attr('src', 'static/Decoy_images/'+my_username+'/'+images[i]);
+                                // $("#my_image").attr("src", "{% static 'Decoy_images/"+my_username+"/"+images[i]+"' %}");
+                                
+                                i++;
+                            }
+
+                        },5000); //(5 sec)
+                    }
+                })
+   
+        })
+    </script>
+    <script type="text/javascript">
+            function findAttack() 
+            {       
+                    my_username=$("#u1").val()
+
+                    // alert(my_username)
+                    setInterval(function()
+                    {
+                        $.ajax({
+                            url:"/send_mail/",
+                            datatype:"json",
+                            data:{
+                                "my_username":my_username,
+                            },
+                            success:function(any)
+                            {
+                                alert("mail sent");
+                            }
+                        })
+                    },20000);//10000 (20sec)
+                    
+                }
+        
+    </script>
+</body>
+
+</html>
